@@ -4,6 +4,7 @@
 #include "flextGL.h"
 #include "GLFW/glfw3.h"
 
+#include <stdlib.h>
 #include <stdio.h>
 
 
@@ -16,6 +17,11 @@ void flextLoadOpenGLFunctions(OpenGLBindings *bindings);
 
 int flextInit(GLFWwindow* window, OpenGLBindings *bindings)
 {
+    if (!window) {
+        glfwTerminate();
+        fprintf(stderr, "Error: No window provided.\n");
+        exit(EXIT_FAILURE);
+    }
   
     int major = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MAJOR);
     int minor = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MINOR);

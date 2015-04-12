@@ -466,6 +466,13 @@ struct OpenGLDepthPacketProcessorImpl : public WithOpenGLBindings
 
   void initialize()
   {
+  
+    if (!opengl_context_ptr) {
+        glfwTerminate();
+        fprintf(stderr, "Error: Context not initialized.\n");
+        exit(EXIT_FAILURE);
+    }
+
     ChangeCurrentOpenGLContext ctx(opengl_context_ptr);
     
     OpenGLBindings *b = new OpenGLBindings();
@@ -768,7 +775,10 @@ OpenGLDepthPacketProcessor::OpenGLDepthPacketProcessor(void *parent_opengl_conte
   GLFWwindow* parent_window = (GLFWwindow *)parent_opengl_context_ptr;
 
   // init glfw - if already initialized nothing happens
-  glfwInit();
+    if (!glfwInit()) {
+        fprintf(stderr, "Error: Could not initialize GLFW.\n");
+        exit(EXIT_FAILURE);
+    }
   
   // setup context
   glfwDefaultWindowHints();
@@ -781,6 +791,12 @@ OpenGLDepthPacketProcessor::OpenGLDepthPacketProcessor(void *parent_opengl_conte
   glfwWindowHint(GLFW_VISIBLE, debug ? GL_TRUE : GL_FALSE);
 
   GLFWwindow* window = glfwCreateWindow(1024, 848, "OpenGLDepthPacketProcessor", 0, parent_window);
+
+  if (!window) {
+      glfwTerminate();
+      fprintf(stderr, "Error: Could not initialize GLFW Window.\n");
+      exit(EXIT_FAILURE);
+  }
 
   impl_ = new OpenGLDepthPacketProcessorImpl(window, debug);
   impl_->initialize();
