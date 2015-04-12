@@ -30,7 +30,7 @@ int flextInit(GLFWwindow* window, OpenGLBindings *bindings)
     
     /* --- Check for minimal version and profile --- */
 
-    if (major * 10 + minor < 33) {
+    if (major * 10 + minor < 2) {
         fprintf(stderr, "Error: OpenGL version 3.3 not supported.\n");
         fprintf(stderr, "       Your version is %d.%d.\n", major, minor);
         fprintf(stderr, "       Try updating your graphics driver.\n");

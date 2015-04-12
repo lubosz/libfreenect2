@@ -504,7 +504,7 @@ struct OpenGLDepthPacketProcessorImpl : public WithOpenGLBindings
     flextInit(opengl_context_ptr, b);
     gl(b);
 
-    input_data.allocate(352, 424 * 10);
+    input_data.allocate(352, 424);
 
     for(int i = 0; i < 3; ++i)
       stage1_data[i].allocate(512, 424);
@@ -817,7 +817,7 @@ OpenGLDepthPacketProcessor::OpenGLDepthPacketProcessor(void *parent_opengl_conte
   // setup context
   glfwDefaultWindowHints();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
   #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   #endif
