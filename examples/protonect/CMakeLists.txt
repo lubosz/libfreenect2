@@ -46,18 +46,19 @@ FIND_PACKAGE(OpenCV REQUIRED)
 INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIR})
 
 # LibUSB
+include_directories(/usr/include/libusb-1.0)
 INCLUDE_DIRECTORIES("${MY_DIR}/../../depends/libusb/include/libusb-1.0/")
 LINK_DIRECTORIES("${MY_DIR}/../../depends/libusb/lib/")
 
 IF(ENABLE_OPENGL)
   # GLFW
-  SET(BUILD_SHARED_LIBS ON CACHE BOOL "Build shared libraries")
-  SET(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
-  SET(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
-  SET(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
+  #SET(BUILD_SHARED_LIBS ON CACHE BOOL "Build shared libraries")
+  #SET(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "Build the GLFW example programs")
+  #SET(GLFW_BUILD_TESTS OFF CACHE BOOL "Build the GLFW test programs")
+  #SET(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 
-  ADD_SUBDIRECTORY(${MY_DIR}/../../depends/glfw_src/ ${MY_DIR}/../../depends/glfw)
-  INCLUDE_DIRECTORIES(${MY_DIR}/../../depends/glfw_src/include/)
+  #ADD_SUBDIRECTORY(${MY_DIR}/../../depends/glfw_src/ ${MY_DIR}/../../depends/glfw)
+  #INCLUDE_DIRECTORIES(${MY_DIR}/../../depends/glfw_src/include/)
 ENDIF(ENABLE_OPENGL)
 
 if(APPLE)
