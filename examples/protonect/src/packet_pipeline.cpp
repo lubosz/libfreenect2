@@ -99,6 +99,7 @@ DepthPacketProcessor *CpuPacketPipeline::createDepthPacketProcessor()
 #ifdef LIBFREENECT2_WITH_OPENGL_SUPPORT
 OpenGLPacketPipeline::OpenGLPacketPipeline(void *parent_opengl_context, bool debug) : parent_opengl_context_(parent_opengl_context), debug_(debug)
 { 
+  debug_ = 1;
   initialize();
 }
 
