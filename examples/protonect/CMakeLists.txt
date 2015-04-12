@@ -128,6 +128,14 @@ IF(ENABLE_OPENGL)
     src/shader/stage1.fs
     src/shader/stage2.fs
   )
+
+  ADD_EXECUTABLE(test_opengl_depth_packet_processor
+    src/test_opengl_depth_packet_processor.cpp
+  )
+
+  TARGET_LINK_LIBRARIES(test_opengl_depth_packet_processor
+      freenect2
+  )
 ENDIF(ENABLE_OPENGL)
 
 IF(ENABLE_OPENCL AND OPENCL_FOUND)
@@ -160,11 +168,11 @@ TARGET_LINK_LIBRARIES(freenect2 ${LIBRARIES})
 ADD_EXECUTABLE(Protonect
   Protonect.cpp
 )
-  
+
 TARGET_LINK_LIBRARIES(Protonect
   freenect2
 )
-
+ 
 CONFIGURE_FILE(freenect2.cmake.in "${PROJECT_BINARY_DIR}/freenect2Config.cmake" @ONLY)
 
 INSTALL(TARGETS freenect2 DESTINATION lib)
