@@ -112,6 +112,8 @@ public:
   cl::Context context;
   cl::Device device;
 
+  std::vector<cl::Device> devices;
+
   cl::Program program;
   cl::CommandQueue queue;
 
@@ -268,9 +270,6 @@ public:
       case CL_DEVICE_TYPE_ACCELERATOR:
         devType = "ACCELERATOR";
         break;
-      case CL_DEVICE_TYPE_CUSTOM:
-        devType = "CUSTOM";
-        break;
       default:
         devType = "UNKNOWN";
       }
@@ -350,9 +349,6 @@ public:
         case CL_DEVICE_TYPE_ACCELERATOR:
           devType = "ACCELERATOR";
           break;
-        case CL_DEVICE_TYPE_CUSTOM:
-          devType = "CUSTOM";
-          break;
         default:
           devType = "UNKNOWN";
         }
@@ -363,8 +359,8 @@ public:
         std::cerr << OUT_NAME("init") "could not find any suitable device" << std::endl;
         return false;
       }
-
-      context = cl::Context(device);
+      devices.push_back(device);
+      context = cl::Context(devices);
     }
     catch(const cl::Error &err)
     {
@@ -389,7 +385,7 @@ public:
 
       cl::Program::Sources source(1, std::make_pair(sourceCode.c_str(), sourceCode.length()));
       program = cl::Program(context, source);
-      program.build(options.c_str());
+      program.build(devices, options.c_str());
 
       queue = cl::CommandQueue(context, device, 0, &err);
 
