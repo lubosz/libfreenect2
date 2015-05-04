@@ -233,11 +233,19 @@ public:
   void getDevices(const std::vector<cl::Platform> &platforms, std::vector<cl::Device> &devices)
   {
     devices.clear();
+
+    printf("have %d platforms\n", platforms.size());
+
     for(size_t i = 0; i < platforms.size(); ++i)
     {
       const cl::Platform &platform = platforms[i];
 
       std::vector<cl::Device> devs;
+
+      std::string platName;
+      platform.getInfo(CL_PLATFORM_NAME, &platName);
+      printf("getting devices for platform %s\n", platName.c_str());
+
       if(platform.getDevices(CL_DEVICE_TYPE_ALL, &devs) != CL_SUCCESS)
       {
         continue;
@@ -280,8 +288,11 @@ public:
 
   bool selectDevice(std::vector<cl::Device> &devices, const int deviceId)
   {
+
+      printf("selecting device %d, devices: %d", deviceId, devices.size());
     if(deviceId != -1 && devices.size() > (size_t)deviceId)
     {
+      printf("OpenCL: selecting device %d", deviceId);
       device = devices[deviceId];
       return true;
     }
@@ -327,8 +338,12 @@ public:
         return false;
       }
 
-      std::vector<cl::Device> devices;
+      printf("have %d platforms\n", platforms.size());
+
       getDevices(platforms, devices);
+
+      printf("have %d devices\n", devices.size());
+
       listDevice(devices);
       if(selectDevice(devices, deviceId))
       {
@@ -359,7 +374,6 @@ public:
         std::cerr << OUT_NAME("init") "could not find any suitable device" << std::endl;
         return false;
       }
-      devices.push_back(device);
       context = cl::Context(devices);
     }
     catch(const cl::Error &err)
