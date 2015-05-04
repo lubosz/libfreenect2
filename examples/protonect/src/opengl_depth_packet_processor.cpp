@@ -287,7 +287,11 @@ public:
   {
     bindToUnit(GL_TEXTURE0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexSubImage2D(GL_TEXTURE_RECTANGLE, /*level*/0, /*xoffset*/0, /*yoffset*/0, width, height, FormatT::Format, FormatT::Type, data);
+    glTexSubImage2D(GL_TEXTURE_RECTANGLE,
+                    /*level*/0,
+                    /*xoffset*/0,
+                    /*yoffset*/0,
+                    width, height, FormatT::Format, FormatT::Type, data);
   }
 
   void download()
