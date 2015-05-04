@@ -351,10 +351,10 @@ struct OpenGLDepthPacketProcessorImpl : public WithOpenGLBindings
   Texture<U16C1> input_data;
 
   Texture<F32C4> stage1_debug;
-  Texture<F32C3> stage1_data[3];
+  Texture<F32C4> stage1_data[3];
   Texture<F32C1> stage1_infrared;
 
-  Texture<F32C3> filter1_data[2];
+  Texture<F32C4> filter1_data[2];
   Texture<U8C1> filter1_max_edge_test;
   Texture<F32C4> filter1_debug;
 
