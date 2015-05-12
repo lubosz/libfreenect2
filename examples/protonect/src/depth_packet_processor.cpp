@@ -31,10 +31,10 @@ namespace libfreenect2
 {
 
 DepthPacketProcessor::Config::Config() :
-  MinDepth(0.5f),
-  MaxDepth(4.5f),
+  MinDepth(0.1f),
+  MaxDepth(40.5f),
   EnableBilateralFilter(true),
-  EnableEdgeAwareFilter(true)
+  EnableEdgeAwareFilter(false)
 {
 
 }
