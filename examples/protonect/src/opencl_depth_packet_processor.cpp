@@ -242,13 +242,21 @@ public:
 
       std::vector<cl::Device> devs;
 
-      std::string platName;
+      std::string platName, platVendor;
       platform.getInfo(CL_PLATFORM_NAME, &platName);
-      printf("getting devices for platform %s\n", platName.c_str());
+      platform.getInfo(CL_PLATFORM_VENDOR, &platVendor);
+
+      std::string badplat("Clover");
+
+      if (strcmp(platName.c_str(),badplat.c_str()) != 0) {
+      printf("getting devices for platform '%s' vendor '%d'\n", platName.c_str(), platVendor.c_str());
+
 
       if(platform.getDevices(CL_DEVICE_TYPE_ALL, &devs) != CL_SUCCESS)
       {
         continue;
+      }
+
       }
 
       devices.insert(devices.end(), devs.begin(), devs.end());
